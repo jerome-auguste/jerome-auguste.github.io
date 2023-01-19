@@ -9,13 +9,27 @@ navLinks.forEach(link => {
   });
 });
 
-// Mouseover animations
+// Fade in sections on scroll
 const sections = document.querySelectorAll("section");
-sections.forEach(section => {
-  section.addEventListener("mouseover", event => {
-    section.style.backgroundColor = "rgba(0, 0, 0, 0.1)";
+window.addEventListener("scroll", () => {
+  sections.forEach(section => {
+    const sectionTop = section.getBoundingClientRect().top;
+    const sectionBottom = section.getBoundingClientRect().bottom;
+    if (sectionTop < window.innerHeight && sectionBottom > 0) {
+      section.classList.add("visible");
+    } else {
+      section.classList.remove("visible");
+    }
   });
-  section.addEventListener("mouseout", event => {
-    section.style.backgroundColor = "white";
+});
+
+// Animate skills on hover
+const skills = document.querySelectorAll("section#skills li");
+skills.forEach(skill => {
+  skill.addEventListener("mouseover", event => {
+    skill.classList.add("animate");
+  });
+  skill.addEventListener("mouseout", event => {
+    skill.classList.remove("animate");
   });
 });
