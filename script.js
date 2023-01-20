@@ -1,35 +1,30 @@
-// Smooth scroll to sections
-const navLinks = document.querySelectorAll("nav a");
+// Smooth scrolling when clicking on navigation links
+const navLinks = document.querySelectorAll('.nav-link');
 navLinks.forEach(link => {
-  link.addEventListener("click", event => {
-    event.preventDefault();
-    const targetId = event.target.getAttribute("href");
-    const target = document.querySelector(targetId);
-    target.scrollIntoView({ behavior: "smooth" });
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector(link.getAttribute('href')).scrollIntoView({
+      behavior: 'smooth'
+    });
   });
 });
 
-// Fade in sections on scroll
-const sections = document.querySelectorAll("section");
-window.addEventListener("scroll", () => {
+// Fade-in effect for sections
+const sections = document.querySelectorAll('section');
+sections.forEach(section => {
+  section.style.opacity = 0;
+});
+
+window.addEventListener('scroll', () => {
   sections.forEach(section => {
-    const sectionTop = section.getBoundingClientRect().top;
-    const sectionBottom = section.getBoundingClientRect().bottom;
-    if (sectionTop < window.innerHeight && sectionBottom > 0) {
-      section.classList.add("visible");
-    } else {
-      section.classList.remove("visible");
+    if (isInViewport(section)) {
+      section.style.opacity = 1;
     }
   });
 });
 
-// Animate skills on hover
-const skills = document.querySelectorAll("section#skills li");
-skills.forEach(skill => {
-  skill.addEventListener("mouseover", event => {
-    skill.classList.add("animate");
-  });
-  skill.addEventListener("mouseout", event => {
-    skill.classList.remove("animate");
-  });
-});
+// Function to check if an element is in the viewport
+function isInViewport(el) {
+  const rect = el.getBoundingClientRect();
+  return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth);
+}
