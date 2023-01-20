@@ -39,6 +39,8 @@ h2 {
 /* Section styles */
 section {
   margin: 40px 20px;
+  opacity: 0.2;
+  transition: opacity 0.5s ease-in-out;
 }
 
 #overview {
@@ -57,4 +59,25 @@ section.visible {
 section#skills li.animate {
   transform: rotate(360deg);
   transition: all 0.5s ease-out;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+nav a {
+  color: #1c1c1c;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #0077C8;
+}
+
+nav a.active {
+  color: #0077C8;
+  font-weight: bold;
 }
